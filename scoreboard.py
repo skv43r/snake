@@ -15,10 +15,11 @@ window.title('My Snake Game')
 class Scoreboard(turtle.Turtle):
     def __init__(self, position=(-298, 260)):
         super().__init__()
+        self.speed(0)
         self.color('pink')
         self.penup()
         self.hideturtle()
-        self.goto(position)
+        self.setposition(position)
 
         
     def count(self, count=0, high_score=0):
