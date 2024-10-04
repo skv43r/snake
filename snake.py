@@ -10,7 +10,14 @@
 import turtle
 
 class Snake(turtle.Turtle):
-    def __init__(self, size=1, color='green', shape='square', speed=1, position=(0, 0), length = 1, direction='Right'):
+    def __init__(self,
+                size=1,
+                color='green',
+                shape='square',
+                speed=100,
+                position=(0, 0),
+                length = 1,
+                direction='Right'):
         super().__init__()
         self.size = size
         self.shapesize(size)
@@ -23,66 +30,57 @@ class Snake(turtle.Turtle):
 
     def move(self):
         x, y = self.position()
-        if self.direction == 'Up' and y != 300 - int(10 * self.size):
+        if self.direction == 'Up' and y != 300 - 10 * self.size:
             self.setposition(x, y + 10)
-            print(self.pos())
-        elif self.direction == 'Down' and y != - 300 + int(15 * self.size):
+        elif self.direction == 'Down' and y != -300 + 10 * (self.size + 1):
             self.setposition(x, y - 10)
-            print(self.pos())
-        elif self.direction == 'Left':
+        elif self.direction == 'Left' and x != -300 + 10 * self.size:
             self.setposition(x - 10, y)
-        elif self.direction == 'Right':
+        elif self.direction == 'Right' and x != 300 - 10 * (self.size + 1):
             self.setposition(x + 10, y)    
 
 
-        
+class SnakeGame:
+    def __init__(self):
+        self.window = turtle.Screen()
+        self.window.setup(width=600, height=600)
+        self.window.bgcolor('black')
+        self.window.title('My Snake Game')
+        self.snake = []
+        self.create_snake()
 
+    def create_snake(self):
+        for i in range(10):
+            snake = Snake()
+            self.snake.append(snake)
 
-window = turtle.Screen()
-window.setup(width=600, height=600)
-window.bgcolor('black')
-window.title('My Snake Game')
+    def move_up(self):
+        self.snake[0].direction = 'Up'
 
+    def move_down(self):
+        self.snake[0].direction = 'Down'
 
-back = Snake()
-snake = [back]
+    def move_left(self):
+        self.snake[0].direction = 'Left'
 
-def move_up():
-    back.direction = 'Up'
-    back.move()
-    window.update()
+    def move_right(self):
+        self.snake[0].direction = 'Right'
 
+    def update_snake(self):
+        for i in range(len(self.snake) - 1, 0, -1):
+            self.snake[i].setposition(self.snake[i-1].position())
+        self.snake[0].move()
+        self.window.update()
+        self.window.ontimer(self.update_snake, 100)
 
-def move_down():
-    back.direction = 'Down'
-    back.move()
-    window.update()
+    def start_game(self):
+        self.window.onkey(self.move_up, 'w')
+        self.window.onkey(self.move_down, 's')
+        self.window.onkey(self.move_left, 'a')
+        self.window.onkey(self.move_right, 'd')
+        self.window.listen()
+        self.update_snake()
+        self.window.mainloop()
 
-
-def move_left():
-    back.direction = 'Left'
-    back.move()
-    window.update()
-
-
-def move_right():
-    back.direction = 'Right'
-    back.move()
-    window.update()        
-    
-
-def update_snake():
-    back.move()
-    window.update()
-    window.ontimer(update_snake, 100)
-            
-window.onkey(move_up, 'w')
-window.onkey(move_down, 's') 
-window.onkey(move_left, 'a') 
-window.onkey(move_right, 'd')
-
-
-window.listen()
-update_snake()
-window.tracer(25, 0)
-window.mainloop()
+game = SnakeGame()
+game.start_game()
