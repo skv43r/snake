@@ -31,7 +31,7 @@ class Food(turtle.Turtle):
             new_x = random.randint(-300 + radius, 300 - radius)
             new_y = random.randint(-300 + radius, 300 - radius)
 
-        self.goto(new_x, new_y)
+        self.setposition(new_x, new_y)
             
 
 window = turtle.Screen()
