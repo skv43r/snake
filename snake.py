@@ -12,19 +12,11 @@ import turtle
 class Snake(turtle.Turtle):
     def __init__(self,
                 size=1,
-                color='green',
-                shape='square',
-                speed=0,
                 position=(0, 0),
                 length = 2,
                 direction='Right'):
         super().__init__()
         self.size = size
-        self.shapesize(size)
-        self.color(color)
-        self.shape(shape)
-        self.speed(speed)
-        self.penup()
         self.setposition(position)
         self.direction = direction
         self.body = []
@@ -65,7 +57,19 @@ class Snake(turtle.Turtle):
 
 
     def change_direction(self, direction):
-        self.direction = direction          
+        self.direction = direction         
+
+    def move_up(self):
+        self.change_direction('Up')
+
+    def move_down(self):
+        self.change_direction('Down')
+
+    def move_left(self):
+        self.change_direction('Left')
+
+    def move_right(self):
+        self.change_direction('Right')     
 
 
 
@@ -76,22 +80,11 @@ window.title('Моя игра Змейка')
 
 snake = Snake()
 
-def move_up():
-    snake.change_direction('Up')
 
-def move_down():
-    snake.change_direction('Down')
-
-def move_left():
-    snake.change_direction('Left')
-
-def move_right():
-    snake.change_direction('Right')
-
-window.onkey(move_up, 'w')
-window.onkey(move_down, 's')
-window.onkey(move_left, 'a')
-window.onkey(move_right, 'd')
+window.onkey(snake.move_up, 'Up')
+window.onkey(snake.move_down, 'Down')
+window.onkey(snake.move_left, 'Left')
+window.onkey(snake.move_right, 'Right')
 window.listen()
 
 snake.update_snake()
