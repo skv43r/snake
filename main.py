@@ -11,12 +11,58 @@
 # Task 6: Заверши работу программы, когда пользователь закроет окно.
 
 import turtle
+from snake import Snake
+from food import Food
+from scoreboard import Scoreboard
 
-window = turtle.Screen()
-window.setup(width=600, height=600)
-window.bgcolor('black')
-window.title('My Snake Game')
+def main():
+
+    window = turtle.Screen()
+    window.setup(width=600, height=600)
+    window.bgcolor('black')
+    window.title('Моя игра Змейка')
+
+    turtle.tracer(0)
+
+    snake = Snake()
+    food = Food()
+    scoreboard = Scoreboard()
+    scoreboard.score()
+
+    turtle.update()
+
+    window.listen()
+    window.onkey(snake.move_up, 'Up')
+    window.onkey(snake.move_down, 'Down')
+    window.onkey(snake.move_left, 'Left')
+    window.onkey(snake.move_right, 'Right')
+    turtle.tracer(0) 
 
 
+    def check_collision_with_food():
+        if snake.body[0].distance(food) < 15:
+            snake.add_segment()
+            food.move_to_new_position()
+            scoreboard.update_count()
+            scoreboard.score()
 
-turtle.done()
+
+    def update():
+        try:
+            if snake.check_collision_with_self():
+                scoreboard.game_over()
+                turtle.done()
+            turtle.update()
+            check_collision_with_food()
+            
+            snake.update_snake()
+            window.ontimer(update, 100)  
+        except turtle.Terminator:
+            pass
+                 
+    update()
+    window.mainloop()
+
+
+if __name__ == "__main__":
+    main()
