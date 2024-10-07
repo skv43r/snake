@@ -15,6 +15,7 @@ class Food(turtle.Turtle):
         self.shape(shape)
         self.speed(speed)
         self.penup()
+        self.move_to_new_position()
         
         
     def move_to_new_position(self):
@@ -24,28 +25,12 @@ class Food(turtle.Turtle):
         self.shapesize(self.current_size)
 
         radius = int(10 * self.current_size / 2)  
-        new_x = random.randint(-300 + radius, 300 - radius)
-        new_y = random.randint(-300 + radius, 300 - radius)
+        new_x = random.randint(-280 + radius, 280 - radius)
+        new_y = random.randint(-280 + radius, 280 - radius)
 
         while (new_x, new_y) == (self.xcor(), self.ycor()):
-            new_x = random.randint(-300 + radius, 300 - radius)
-            new_y = random.randint(-300 + radius, 300 - radius)
+            new_x = random.randint(-280 + radius, 280 - radius)
+            new_y = random.randint(-280 + radius, 280 - radius)
 
-        self.setposition(new_x, new_y)
-            
-
-window = turtle.Screen()
-window.setup(width=600, height=600)
-window.bgcolor('black')
-window.title('My Snake Game')
-food = Food()
-
-food.move_to_new_position()
-food.move_to_new_position()
-food.move_to_new_position()
-food.move_to_new_position()
-food.move_to_new_position()
-food.move_to_new_position()
-
-
-turtle.mainloop()  
+        self.setposition(new_x, new_y)  
+ 
