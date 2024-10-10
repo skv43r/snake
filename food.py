@@ -1,10 +1,10 @@
 # TODO: Создай класс Food(Turtle).
 # Task 1: Установи форму еды в круг, уменьшай размер до половины, установи цвет и скорость. +
 # Task 2: Напиши метод для случайного перемещения еды на новое место. +
-import turtle
-import random
+from  turtle import Turtle
+from random import randint
 
-class Food(turtle.Turtle):
+class Food(Turtle):
 
     def __init__(self, size=1.5, color='red', shape='circle', speed=0):
         super().__init__()
@@ -25,12 +25,12 @@ class Food(turtle.Turtle):
         self.shapesize(self.current_size)
 
         radius = int(10 * self.current_size / 2)  
-        new_x = random.randint(-280 + radius, 280 - radius)
-        new_y = random.randint(-280 + radius, 280 - radius)
+        new_x = randint(-280 + radius, 280 - radius)
+        new_y = randint(-280 + radius, 280 - radius)
 
         while (new_x, new_y) == (self.xcor(), self.ycor()):
-            new_x = random.randint(-280 + radius, 280 - radius)
-            new_y = random.randint(-280 + radius, 280 - radius)
+            new_x = randint(-280 + radius, 280 - radius)
+            new_y = randint(-280 + radius, 280 - radius)
 
         self.setposition(new_x, new_y)  
  
