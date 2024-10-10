@@ -7,9 +7,10 @@
 # Task 6: Напиши метод для движения змейки, где каждая часть тела следует за предыдущей. +
 # Task 7: Напиши методы для изменения направления движения змейки (вверх, вниз, влево, вправо). +
 
-import turtle
+from turtle import Turtle
 
-class Snake(turtle.Turtle):
+
+class Snake(Turtle):
     def __init__(self,
                 size=1,
                 length = 2,
@@ -22,7 +23,7 @@ class Snake(turtle.Turtle):
 
 
     def create_segment(self):
-        segment = turtle.Turtle()
+        segment = Turtle()
         segment.shape('square')
         segment.color('green')
         segment.shapesize(1)

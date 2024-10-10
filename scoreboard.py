@@ -5,14 +5,9 @@
 # Task 4: Напиши метод для отображения сообщения "GAME OVER".
 # Task 5: Напиши метод для увеличения счета и его обновления на экране.
 
-import turtle
+from turtle import Turtle
 
-# window = turtle.Screen()
-# window.setup(width=600, height=600)
-# window.bgcolor('black')
-# window.title('My Snake Game')
-
-class Scoreboard(turtle.Turtle):
+class Scoreboard(Turtle):
     def __init__(self):
         super().__init__()
         self.speed(0)
