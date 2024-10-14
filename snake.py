@@ -51,13 +51,13 @@ class Snake(Turtle):
 
     def move(self):
         x, y = self.position()
-        if self.direction == 'Up' and y != 300 - 10 * self.size:
+        if self.direction == 'Up' and y < 300 - 10 * self.size:
             self.setposition(x, y + 10)
-        elif self.direction == 'Down' and y != -300 + 10 * (self.size + 1):
+        elif self.direction == 'Down' and y > -300 + 10 * (self.size + 1):
             self.setposition(x, y - 10)
-        elif self.direction == 'Left' and x != -300 + 10 * self.size:
+        elif self.direction == 'Left' and x > -300 + 10 * self.size:
             self.setposition(x - 10, y)
-        elif self.direction == 'Right' and x != 300 - 10 * (self.size + 1):
+        elif self.direction == 'Right' and x < 300 - 10 * (self.size + 1):
             self.setposition(x + 10, y)
 
 
