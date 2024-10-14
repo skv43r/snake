@@ -8,6 +8,7 @@
 # Task 7: Напиши методы для изменения направления движения змейки (вверх, вниз, влево, вправо). +
 
 from turtle import Turtle
+import turtle
 
 
 class Snake(Turtle):
@@ -58,6 +59,27 @@ class Snake(Turtle):
             self.setposition(x - 10, y)
         elif self.direction == 'Right' and x != 300 - 10 * (self.size + 1):
             self.setposition(x + 10, y)
+
+
+    def check_collision_with_walls(self):
+        x, y = self.position()
+        if self.is_collision_with_wall(x,y):
+            return True
+        else:
+            self.move()
+            return False
+
+    
+    def is_collision_with_wall(self, x, y):
+        if self.direction == 'Up' and y == 300:
+            return True
+        elif self.direction == 'Down' and y == -300:
+            return True
+        elif self.direction == 'Left' and x == -300:
+            return True
+        elif self.direction == 'Right' and x == 300:
+            return True
+        return False
 
 
     def check_collision_with_self(self):
