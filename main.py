@@ -9,7 +9,7 @@
     # Task 5.3: Проверь, столкнулась ли змейка со стеной. Если да, останови игру и покажи сообщение "GAME OVER".
     # Task 5.4: Проверь, столкнулась ли змейка с собственным хвостом. Если да, останови игру и покажи сообщение "GAME OVER".
 # Task 6: Заверши работу программы, когда пользователь закроет окно.
-
+import csv
 import turtle
 from snake import Snake
 from food import Food
@@ -36,7 +36,7 @@ def main():
     window.onkey(snake.move_down, 'Down')
     window.onkey(snake.move_left, 'Left')
     window.onkey(snake.move_right, 'Right')
-    turtle.tracer(0) 
+    turtle.tracer(0)
 
 
     def check_collision_with_food():
@@ -48,16 +48,16 @@ def main():
 
 
     def update():
+        window.update()
+        check_collision_with_food()
+        snake.update_snake()
         if snake.check_collision_with_self() or snake.check_collision_with_walls():
             scoreboard.game_over()
             turtle.done()
-        else:    
-            turtle.update()
-            check_collision_with_food()
-            
-            snake.update_snake()
-            window.ontimer(update, 100)  
-                 
+        if scoreboard.count >= scoreboard.high_score:
+            high_score = scoreboard.count
+            scoreboard.write_hight_score(high_score)
+        window.ontimer(update, 100)
     update()
     window.mainloop()
 
