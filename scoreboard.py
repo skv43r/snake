@@ -6,6 +6,7 @@
 # Task 5: Напиши метод для увеличения счета и его обновления на экране.
 
 from turtle import Turtle
+import csv
 
 class Scoreboard(Turtle):
     def __init__(self):
@@ -16,14 +17,40 @@ class Scoreboard(Turtle):
         self.hideturtle()
         self.count = 0
 
+
+    def read_high_score(self):
+        high_score = 0
+        try:
+            with open('high_score.csv', 'r') as csvfile:
+                reader = csv.reader(csvfile)
+                rows = [int(row[0]) for row in reader]
+                if rows:
+                    high_score = max(rows)
+        except ValueError:
+            pass  
+        return high_score
+
         
     def score(self):
         self.clear()
-        self.setposition(-298, 280)
-        self.write(f'Score: {self.count}', move=True, align='left', font=('Arial', 12, 'bold',))
+        self.setposition(-298, 270)
+        self.high_score = self.read_high_score()
+        self.write(f'Score: {self.count}\nHigh score: {self.high_score}', move=True, align='left', font=('Arial', 12, 'bold',))
     
+
+    def write_hight_score(self, score):
+        with open('high_score.csv', 'a', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow([score])
+
+
     def update_count(self):
         self.count += 1
+        if self.count > self.high_score:
+            self.high_score = self.count
+            self.write_hight_score(self.high_score)
+        self.score()
+
 
     def game_over(self):
         self.setposition(-125, 0)
