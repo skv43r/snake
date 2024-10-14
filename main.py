@@ -48,17 +48,15 @@ def main():
 
 
     def update():
-        try:
-            if snake.check_collision_with_self():
-                scoreboard.game_over()
-                turtle.done()
+        if snake.check_collision_with_self() or snake.check_collision_with_walls():
+            scoreboard.game_over()
+            turtle.done()
+        else:    
             turtle.update()
             check_collision_with_food()
             
             snake.update_snake()
             window.ontimer(update, 100)  
-        except turtle.Terminator:
-            pass
                  
     update()
     window.mainloop()
