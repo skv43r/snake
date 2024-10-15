@@ -66,18 +66,17 @@ class Snake(Turtle):
         if self.is_collision_with_wall(x,y):
             return True
         else:
-            self.move()
             return False
 
     
     def is_collision_with_wall(self, x, y):
-        if self.direction == 'Up' and y == 300:
+        if self.direction == 'Up' and y > 300:
             return True
-        elif self.direction == 'Down' and y == -300:
+        elif self.direction == 'Down' and y < -300:
             return True
-        elif self.direction == 'Left' and x == -300:
+        elif self.direction == 'Left' and x < -300:
             return True
-        elif self.direction == 'Right' and x == 300:
+        elif self.direction == 'Right' and x > 300:
             return True
         return False
 
