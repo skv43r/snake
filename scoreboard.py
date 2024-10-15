@@ -33,7 +33,7 @@ class Scoreboard(Turtle):
         
     def score(self):
         self.clear()
-        self.setposition(-298, 270)
+        self.setposition(-298, 260)
         self.high_score = self.read_high_score()
         self.write(f'Score: {self.count}\nHigh score: {self.high_score}', move=True, align='left', font=('Arial', 12, 'bold',))
     
