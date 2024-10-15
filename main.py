@@ -48,16 +48,20 @@ def main():
 
 
     def update():
-        window.update()
-        check_collision_with_food()
-        snake.update_snake()
-        if snake.check_collision_with_self() or snake.check_collision_with_walls():
-            scoreboard.game_over()
-            turtle.done()
-        if scoreboard.count >= scoreboard.high_score:
-            high_score = scoreboard.count
-            scoreboard.write_hight_score(high_score)
-        window.ontimer(update, 100)
+        try:
+            if snake.check_collision_with_self() or snake.check_collision_with_walls():
+                scoreboard.game_over()
+                turtle.done()
+            if scoreboard.count >= scoreboard.high_score:
+                high_score = scoreboard.count
+                scoreboard.write_hight_score(high_score)
+            turtle.update()
+            check_collision_with_food()
+            snake.update_snake()
+            window.ontimer(update, 100)
+        except turtle.Terminator:
+            pass
+
     update()
     window.mainloop()
 
