@@ -36,27 +36,27 @@ def control(window, snake):
     window.onkey(snake.move_right, 'Right')
 
 def check_collision_with_food(snake, food, scoreboard):
-        if snake.body[0].distance(food) < 15:
-            snake.extend()
-            food.move_to_new_position()
-            scoreboard.update_count()
-            scoreboard.score()
+    if snake.body[0].distance(food) < 15:
+        snake.extend()
+        food.move_to_new_position()
+        scoreboard.update_count()
+        scoreboard.score()
 
 def update(window, snake, food, scoreboard, collision_detector):
-        try:
-            if collision_detector.check_collision_with_self() or collision_detector.check_collision_with_walls():
-                scoreboard.game_over()
-                turtle.done()
-            if scoreboard.count >= scoreboard.high_score:
-                high_score = scoreboard.count
-                scoreboard.write_hight_score(high_score)
-            turtle.update()
-            check_collision_with_food(snake, food, scoreboard)
-            turtle.update()
-            snake.move()
-            window.ontimer(lambda: update(window, snake, food, scoreboard, collision_detector), 100)
-        except turtle.Terminator:
-            pass
+    try:
+        if collision_detector.check_collision_with_self() or collision_detector.check_collision_with_walls():
+            scoreboard.game_over()
+            turtle.done()
+        if scoreboard.count >= scoreboard.high_score:
+            high_score = scoreboard.count
+            scoreboard.write_hight_score(high_score)
+        turtle.update()
+        check_collision_with_food(snake, food, scoreboard)
+        turtle.update()
+        snake.move()
+        window.ontimer(lambda: update(window, snake, food, scoreboard, collision_detector), 100)
+    except turtle.Terminator:
+        pass
 
 def main():
     window = setup()
